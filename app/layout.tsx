@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_2 } from "next/font/google";
 import Navigation from "./_components/Navigation";
 import "./_styles/globals.css";
+import Header from "./_components/Header";
 
 const baloo = Baloo_2({ // we just have to get name and import we can use chatgpt also to get this and directly use on body baloo.variable
   subsets: ["latin"],
@@ -25,9 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={baloo.variable}
+        className={`${baloo.variable} bg-amber-50`}
       >
-        <Navigation />
+        <Header/>
         {children}
       </body>
     </html>
