@@ -18,7 +18,7 @@ function Error({
           Something went wrong
         </h2>
 
-        <p className="text-white/70 mb-8 break-words">
+        <p className="text-white/70 mb-8 wrap-break-words">
           {error.message || "An unexpected error occurred."}
         </p>
 

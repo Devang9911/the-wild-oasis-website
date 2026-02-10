@@ -4,12 +4,16 @@ import about1 from "@/public/about-1.jpg";
 import about2 from "@/public/about-2.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { getCabins } from "../_lib/services";
+
+export const revalidate = 86400
 
 export const metadata: Metadata = {
   title: "About",
 };
 
-function page() {
+async function page() {
+  const cabin = await getCabins()
   return (
     <div className="text-white/70 pt-25 ">
       <div className="p-10 flex flex-col gap-10 md:gap-15">
@@ -28,7 +32,7 @@ function page() {
             </p>
 
             <p className="md:text-lg">
-              Our 8 luxury cabins provide a cozy base, but the real freedom and
+              Our {cabin.length} luxury cabins provide a cozy base, but the real freedom and
               peace you'll find in the surrounding mountains.
             </p>
 

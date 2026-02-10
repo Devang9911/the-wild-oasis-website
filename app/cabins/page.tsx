@@ -2,12 +2,28 @@ import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import CabinsList from "./CabinsList";
 import Spinner from "../_components/Spinner";
+import CabinFilter from "../_components/CabinFilter";
+
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Cabins",
 };
 
-async function page() {
+type PageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+type Filter = "all" | "small" | "medium" | "large";
+
+//search param gives promise so we have to resolve first
+export default async function page({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
+  const filter: Filter =
+    typeof resolvedSearchParams?.capacity === "string" &&
+    ["all", "small", "medium", "large"].includes(resolvedSearchParams.capacity)
+      ? (resolvedSearchParams.capacity as Filter)
+      : "all";
+
   return (
     <div className="pt-25 text-white/70">
       <div className="p-10 flex flex-col gap-5">
@@ -22,12 +38,14 @@ async function page() {
           little home away from home. The perfect spot for a peaceful, calm
           vacation. Welcome to paradise.
         </p>
-        <Suspense fallback={<Spinner />}>
-          <CabinsList />
+        <div className="flex items-center justify-end">
+          <CabinFilter/>
+        </div>
+        <Suspense fallback={<Spinner />} key={filter}>
+          <CabinsList filter={filter} />
         </Suspense>
       </div>
     </div>
   );
 }
 
-export default page;
