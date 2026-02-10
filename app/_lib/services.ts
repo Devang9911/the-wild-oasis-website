@@ -1,20 +1,20 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
 import { Database } from "./database.types";
+import { notFound } from "next/navigation";
 
 type Cabin = Database["public"]["Tables"]["cabins"]["Row"];
 
-export async function getCabin(id: string): Promise<Cabin> {
+export async function getCabin(id: number): Promise<Cabin> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
     .eq("id", id)
-    .single();
+    .maybeSingle();
 
-  if (error) {
-    throw new Error(error.message);
-  }
-  return data as Cabin;
+  if (error) notFound();
+
+  return data;
 }
 
 export async function getCabins(): Promise<Cabin[]> {
@@ -24,7 +24,7 @@ export async function getCabins(): Promise<Cabin[]> {
     .order("name");
 
   if (error) {
-    throw new Error(error.message);
+    if (error) notFound();
   }
   return data as Cabin[];
 }
