@@ -1,11 +1,13 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import logo from "@/public/logo.png"
 import React from 'react'
 
 function Logo() {
   return (
     <Link href="/" className="flex items-center gap-4 z-10">
-      <img src={"logo.png"} height="60" width="60" alt="The Wild Oasis logo" />
-      <span className="text-xl font-medium hidden md:block">
+      <Image src={logo} height="60" width="60" alt="The Wild Oasis logo" />
+      <span className="text-xl text-white/70 tracking-wider hidden md:block">
         The Wild Oasis
       </span>
     </Link>

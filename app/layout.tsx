@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Baloo_2 } from "next/font/google";
-import Navigation from "./_components/Navigation";
 import "./_styles/globals.css";
 import Header from "./_components/Header";
 
@@ -28,12 +27,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${baloo.variable} bg-amber-50 antialiased min-h-screen flex flex-col`}
+        className={`${baloo.variable} antialiased min-h-screen bg-gray-800`}
       >
-        <Header />
-        <div className="flex-1 border">
-          <main>{children}</main>
-        </div>
+          <Header />
+          <main className=" min-h-screen">
+            {children}
+          </main>
       </body>
     </html>
   );
