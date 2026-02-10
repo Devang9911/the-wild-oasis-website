@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
+import CabinsList from "./CabinsList";
+import Spinner from "../_components/Spinner";
 
 export const metadata: Metadata = {
   title: "Cabins",
 };
 
-function page() {
+async function page() {
   return (
     <div className="pt-25 text-white/70">
       <div className="p-10 flex flex-col gap-5">
@@ -20,7 +22,9 @@ function page() {
           little home away from home. The perfect spot for a peaceful, calm
           vacation. Welcome to paradise.
         </p>
-        
+        <Suspense fallback={<Spinner />}>
+          <CabinsList />
+        </Suspense>
       </div>
     </div>
   );

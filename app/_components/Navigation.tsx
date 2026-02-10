@@ -59,8 +59,8 @@ function Navigation() {
       {open && (
         <div className="absolute left-0 top-full w-full md:hidden">
           <div
-            className="mx-4 mt-3 rounded-2xl border border-white/20 
-                  bg-white/10 backdrop-blur-xl shadow-lg"
+            className="mx-4 mt-3 rounded-2xl 
+                  bg-gray-800 shadow-lg"
           >
             <ul className="flex flex-col gap-1 p-3 text-xl">
               {[
@@ -79,8 +79,8 @@ function Navigation() {
                       className={`block rounded-xl px-5 py-3 transition-all
                 ${
                   active
-                    ? "bg-black/50 text-white/70 backdrop-blur-md shadow-sm"
-                    : "text-black hover:bg-white/40"
+                    ? "bg-white/20 text-white/70 shadow-sm"
+                    : "text-white/70 hover:bg-white/20"
                 }`}
                     >
                       {item.name}

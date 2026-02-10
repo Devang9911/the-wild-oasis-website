@@ -13,8 +13,10 @@ export default function App() {
           alt="Mountain with cabin"
           placeholder="blur"
           quality={75}
+          priority
           className="object-cover object-top"
         />
+
         <div className="absolute inset-0 bg-black/40 z-0" />
 
         {/* overlay content */}

@@ -29,10 +29,8 @@ export default function RootLayout({
       <body
         className={`${baloo.variable} antialiased min-h-screen bg-gray-800`}
       >
-          <Header />
-          <main className=" min-h-screen">
-            {children}
-          </main>
+        <Header />
+        <main className=" min-h-screen">{children}</main>
       </body>
     </html>
   );
