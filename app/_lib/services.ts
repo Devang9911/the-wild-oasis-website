@@ -1,4 +1,3 @@
-import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
 import { Database } from "./database.types";
 import { notFound } from "next/navigation";
@@ -28,3 +27,5 @@ export async function getCabins(): Promise<Cabin[]> {
   }
   return data as Cabin[];
 }
+
+

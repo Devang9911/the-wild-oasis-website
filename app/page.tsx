@@ -6,7 +6,7 @@ export default function App() {
   return (
     <>
       <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
-        {/* background image */}
+        
         <Image
           src={bg}
           fill
@@ -19,7 +19,6 @@ export default function App() {
 
         <div className="absolute inset-0 bg-black/40 z-0" />
 
-        {/* overlay content */}
         <div className="z-10 flex flex-col items-center">
           <h1 className="text-2xl md:text-5xl font-medium tracking-widest text-white/95 capitalize mb-5">
             Welcome to the paradise

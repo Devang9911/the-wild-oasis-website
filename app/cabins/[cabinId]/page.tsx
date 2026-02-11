@@ -29,6 +29,7 @@ export default async function Page({ params }: PageProps) {
   const { cabinId } = await params;
 
   return (
+    
     <div className="pt-40 px-20">
       <Suspense fallback={<Spinner />}>
         <Cabin cabinId={cabinId} />

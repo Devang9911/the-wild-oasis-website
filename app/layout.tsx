@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_2 } from "next/font/google";
 import "./_styles/globals.css";
 import Header from "./_components/Header";
+import { ToastContainer } from "react-toastify";
 
 const baloo = Baloo_2({
   // we just have to get name and import we can use chatgpt also to get this and directly use on body baloo.variable
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${baloo.variable} antialiased min-h-screen bg-gray-800`}
       >
         <Header />
+        <ToastContainer />
         <main className=" min-h-screen">{children}</main>
       </body>
     </html>

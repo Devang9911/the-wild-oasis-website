@@ -6,14 +6,15 @@ import { getCabin } from "../_lib/services";
 type Cabin = Database["public"]["Tables"]["cabins"]["Row"];
 
 async function Cabin({ cabinId }: { cabinId: string }) {
-  const cabin = await getCabin(Number(cabinId));
-  const { name, max_capacity, image, description } = cabin;
+  const cabin: Cabin = await getCabin(Number(cabinId));
+  const { name, max_capacity, image, description, regular_price, discount } =
+    cabin;
 
   return (
-    <section className="mb-24 bg-white/20 text-white/70">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-12">
+    <section className="text-white/70">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-12 bg-white/20 mb-10">
         {/* Image */}
-        <div className="relative h-105 lg:h-full">
+        <div className="relative md:h-105 h-80">
           <Image
             src={image ?? ""}
             alt={`Cabin ${name}`}
@@ -25,7 +26,7 @@ async function Cabin({ cabinId }: { cabinId: string }) {
 
         {/* Content */}
         <div className="p-10 lg:p-14 flex flex-col justify-center">
-          <h3 className="text-5xl lg:text-6xl font-black text-accent-100 mb-6">
+          <h3 className="text-3xl lg:text-6xl font-black text-accent-100 mb-6">
             Cabin {name}
           </h3>
 
@@ -56,6 +57,11 @@ async function Cabin({ cabinId }: { cabinId: string }) {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="flex flex-col justify-center">
+        <h2 className="text-2xl lg:text-6xl font-black text-accent-100 text-yellow-600 text-center mb-10">
+          Reserve {name} today. Pay on arrival
+        </h2>
       </div>
     </section>
   );
