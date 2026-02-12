@@ -2,6 +2,7 @@ import { supabase } from "./supabase";
 import { Database } from "./database.types";
 import { notFound } from "next/navigation";
 import { eachDayOfInterval } from "date-fns";
+import { signIn } from 'next-auth/react';
 
 type Cabin = Database["public"]["Tables"]["cabins"]["Row"];
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
@@ -81,4 +82,33 @@ export async function getSettings(): Promise<Settings> {
   }
 
   return data;
+}
+
+//---------------------------------------------------------------------------------
+export async function getGuest(email : string){
+  const {data } = await supabase
+    .from("guests")
+    .select("*")
+    .eq("email",email)
+    .single()
+
+    return data
+}
+
+//----------------------------------------------------------------------------
+type newGuest = {
+  email : string
+  name : string
+}
+export async function createGuest(newGuest : newGuest){
+  const {data , error} = await supabase
+    .from("guests")
+    .insert([newGuest])
+
+  if(error){
+    console.log(error)
+    throw new Error("Guest could not be created")
+  }
+
+  return data
 }

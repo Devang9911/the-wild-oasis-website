@@ -2,6 +2,7 @@
 
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import { createGuest, getGuest } from "./services";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -24,6 +25,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     authorized({ auth }) {
       return !!auth?.user;
     },
+    async signIn({user , account , profile}){
+      try {
+        if (!user.email) return false;
+        const existing = await getGuest(user.email);
+        if(!existing) {
+          await createGuest({email : user.email , name : user.name || ""})
+        }
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
   },
   pages : {
     signIn : "/login"
