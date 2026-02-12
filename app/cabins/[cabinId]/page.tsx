@@ -30,7 +30,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     
-    <div className="pt-40 px-20">
+    <div className="pt-40 px-3">
       <Suspense fallback={<Spinner />}>
         <Cabin cabinId={cabinId} />
       </Suspense>
