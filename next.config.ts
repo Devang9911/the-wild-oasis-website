@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         hostname: "ipxaflraokcxhvppozxl.supabase.co",
         pathname: "/storage/v1/object/public/cabin_images/**",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };

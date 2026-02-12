@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import CabinsList from "./CabinsList";
 import Spinner from "../_components/Spinner";
 import CabinFilter from "../_components/CabinFilter";
+import ReservationReminder from "../_components/ReservationReminder";
 
 export const revalidate = 0;
 
@@ -43,6 +44,7 @@ export default async function page({ searchParams }: PageProps) {
         </div>
         <Suspense fallback={<Spinner />} key={filter}>
           <CabinsList filter={filter} />
+          <ReservationReminder/>
         </Suspense>
       </div>
     </div>

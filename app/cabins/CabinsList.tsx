@@ -1,8 +1,6 @@
 import { getCabins } from "../_lib/services";
 import CabinCard from "../_components/CabinCard";
 import { Database } from "../_lib/database.types";
-import { Suspense } from "react";
-import Spinner from "../_components/Spinner";
 
 type Cabin = Database["public"]["Tables"]["cabins"]["Row"];
 type Filter = "all" | "small" | "medium" | "large";

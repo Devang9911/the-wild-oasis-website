@@ -1,15 +1,17 @@
 import React from "react";
 import type { Metadata } from "next";
+import { auth } from "../_lib/auth";
 
 export const metadata: Metadata = {
   title: "Guest area",
 };
 
-function page() {
+async function page() {
+  const session = await auth()
   return (
     <div>
       <h1 className="text-xl md:text-3xl tracking-widest text-orange-400 font-medium">
-        Welcome, User
+        Welcome, {session?.user?.name}
       </h1>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SignoutBtn from "./SignoutBtn";
+import SignOutButton from "./SignOutButton";
 
 const navItems = [
   { label: "Home", href: "/account" },
@@ -46,7 +46,7 @@ export default function AccountNav() {
           );
         })}
       </ul>
-      <SignoutBtn/>
+      <SignOutButton />
     </div>
   );
 }
