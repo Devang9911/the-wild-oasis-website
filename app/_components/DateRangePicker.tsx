@@ -27,10 +27,10 @@ export default function DateRangePicker({
   const { min_booking_length, max_booking_length } = settings;
 
   return (
-    <div className="bg-[#0f1c24] p-6 lg:w-[50%] w-full text-white space-y-4">
+    <div className="bg-[#0f1c24] p-6 lg:w-[30%] w-full text-white space-y-4 flex flex-col items-center">
       <DayPicker
         mode="range"
-        numberOfMonths={2}
+        numberOfMonths={1}
         min={(min_booking_length ?? 0) + 1}
         max={max_booking_length ?? 0}
         onSelect={setRange}

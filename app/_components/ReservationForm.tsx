@@ -33,7 +33,7 @@ function ReservationForm({ cabin , session }: Prop) {
   //   const createBookingWithData = createBooking.bind(null, bookingData);
 
   return (
-    <div className="bg-[#0f1c24] lg:w-[50%] w-full">
+    <div className="bg-[#0f1c24] lg:w-[30%] w-full">
       <div className="bg-white/20 text-white/70 px-16 py-3 flex justify-center items-center">
         <div className="flex gap-4 items-center">
           <img

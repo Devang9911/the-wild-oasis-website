@@ -16,7 +16,7 @@ async function Reserve({ cabin }: { cabin: Cabin }) {
   const session = await auth();
 
   return (
-    <div className="flex flex-col lg:flex-row mb-10">
+    <div className="flex flex-col lg:flex-row lg:justify-center mb-10">
       <DateRangePicker
         settings={settings}
         bookedDates={bookedDates}
