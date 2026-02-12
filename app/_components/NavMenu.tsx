@@ -95,46 +95,50 @@ function NavMenu() {
             className="mx-4 mt-3 rounded-2xl bg-gray-800 shadow-lg"
           >
             <ul className="flex flex-col gap-1 p-3 text-xl">
-              {[
-                { name: "Home", href: "/" },
-                { name: "Cabins", href: "/cabins" },
-                { name: "About", href: "/about" },
-                { name: "Guest area", href: "/account" },
-              ].map((item) => (
-                <li key={item.href}>
+              <li>
+                <Link
+                  href={"/cabins"}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-5 py-3 text-white/70 hover:bg-white/20"
+                >
+                  Cabins
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={"/about"}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-5 py-3 text-white/70 hover:bg-white/20"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                {session?.user?.image ? (
                   <Link
-                    href={item.href}
+                    href="/account"
+                    className="rounded-xl px-5 py-3 text-white/70 hover:bg-white/20 flex items-center gap-2"
+                    onClick={() => setOpen(false)}
+                  >
+                    <Image
+                      src={session.user.image}
+                      alt="Profile"
+                      width={36}
+                      height={36}
+                      className="rounded-full border border-white/30"
+                    />
+                    <span>Guest area</span>
+                  </Link>
+                ) : (
+                  <Link
+                    href="/account"
                     onClick={() => setOpen(false)}
                     className="block rounded-xl px-5 py-3 text-white/70 hover:bg-white/20"
                   >
-                    {item.name}
+                    Guest area
                   </Link>
-                </li>
-              ))}
-
-              {/* 👇 Mobile Profile */}
-              {status === "authenticated" && session?.user && (
-                <li className="px-5 py-3 border-t border-white/20 mt-2">
-                  <div className="flex items-center gap-3">
-                    {session.user.image && (
-                      <Image
-                        src={session.user.image}
-                        alt="Profile"
-                        width={40}
-                        referrerPolicy="no-referrer"
-                        height={40}
-                        className="rounded-full"
-                      />
-                    )}
-                    <button
-                      onClick={() => signOut()}
-                      className="text-white/70 hover:underline text-xl"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                </li>
-              )}
+                )}
+              </li>
             </ul>
           </div>
         </div>
