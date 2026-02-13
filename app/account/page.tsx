@@ -11,7 +11,7 @@ async function page() {
   return (
     <div>
       <h1 className="text-xl md:text-3xl tracking-widest text-orange-400 font-medium">
-        Welcome, {session?.user?.name}
+        Welcome, {session?.user?.name?.split(" ")[0]}
       </h1>
     </div>
   );

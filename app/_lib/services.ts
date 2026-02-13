@@ -2,11 +2,12 @@ import { supabase } from "./supabase";
 import { Database } from "./database.types";
 import { notFound } from "next/navigation";
 import { eachDayOfInterval } from "date-fns";
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
 
 type Cabin = Database["public"]["Tables"]["cabins"]["Row"];
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
 type Settings = Database["public"]["Tables"]["settings"]["Row"];
+type Guests = Database["public"]["Tables"]["guests"]["Row"];
 
 //---------------------------------------------------------------------------
 export async function getCabin(id: number): Promise<Cabin> {
@@ -36,7 +37,7 @@ export async function getCabins(): Promise<Cabin[]> {
 
 //----------------------------------------------------------------------
 export async function getBookedDatesByCabinId(
-  cabinId: number
+  cabinId: number,
 ): Promise<Date[]> {
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0);
@@ -51,19 +52,19 @@ export async function getBookedDatesByCabinId(
     .neq("status", "cancelled");
 
   if (error) {
-  console.error("Supabase error:", error);
-  throw new Error(error.message);
-}
+    console.error("Supabase error:", error);
+    throw new Error(error.message);
+  }
 
-
-  const bookedDates = data
-    ?.map((booking) =>
-      eachDayOfInterval({
-        start: new Date(booking.start_date),
-        end: new Date(booking.end_date),
-      })
-    )
-    .flat() ?? [];
+  const bookedDates =
+    data
+      ?.map((booking) =>
+        eachDayOfInterval({
+          start: new Date(booking.start_date),
+          end: new Date(booking.end_date),
+        }),
+      )
+      .flat() ?? [];
 
   return bookedDates;
 }
@@ -85,30 +86,29 @@ export async function getSettings(): Promise<Settings> {
 }
 
 //---------------------------------------------------------------------------------
-export async function getGuest(email : string){
-  const {data } = await supabase
+export async function getGuest(email: string) {
+  const { data } = await supabase
     .from("guests")
     .select("*")
-    .eq("email",email)
-    .single()
+    .eq("email", email)
+    .single();
 
-    return data
+  return data;
 }
 
 //----------------------------------------------------------------------------
 type newGuest = {
-  email : string
-  name : string
-}
-export async function createGuest(newGuest : newGuest){
-  const {data , error} = await supabase
-    .from("guests")
-    .insert([newGuest])
+  email: string;
+  name: string;
+};
+export async function createGuest(newGuest: newGuest) {
+  const { data, error } = await supabase.from("guests").insert([newGuest]);
 
-  if(error){
-    console.log(error)
-    throw new Error("Guest could not be created")
+  if (error) {
+    console.log(error);
+    throw new Error("Guest could not be created");
   }
 
-  return data
+  return data;
 }
+

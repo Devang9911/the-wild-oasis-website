@@ -1,9 +1,8 @@
 "use client";
 
-import { differenceInDays } from "date-fns";
+import type { Session } from "next-auth";
 import { Database } from "../_lib/database.types";
 import { useReservation } from "./ReservationContext";
-import type { Session } from "next-auth";
 
 type Cabin = Database["public"]["Tables"]["cabins"]["Row"];
 
