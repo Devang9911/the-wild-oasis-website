@@ -15,10 +15,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
 
   callbacks: {
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.sub!;
-      }
+    async session({ session, user }) {
+      const guest = await getGuest(session.user.email);
+      session.user.id = guest.id;
       return session;
     },
 
@@ -36,8 +35,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       } catch (error) {
         return false;
       }
-    }
+    },
+    
   },
+  
   pages : {
     signIn : "/login"
   }

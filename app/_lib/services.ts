@@ -112,3 +112,24 @@ export async function createGuest(newGuest: newGuest) {
   return data;
 }
 
+//-------------------------------------------------------
+export type BookingWithCabin = Booking & {
+  cabins: Cabin;
+};
+
+export async function getBookings(
+  guest_id: number
+): Promise<BookingWithCabin[]> {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("* , cabins(*)") // full table
+    .eq("guest_id", guest_id)
+    .order("start_date");
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not get loaded");
+  }
+
+  return data ?? [];
+}
