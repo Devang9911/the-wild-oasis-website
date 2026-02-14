@@ -1,27 +1,22 @@
-import React from "react";
-import { title } from "process";
+import ProfileInfo from "@/app/_components/ProfileInfo";
+import Spinner from "@/app/_components/Spinner";
 import { Metadata } from "next";
-import { auth } from "@/app/_lib/auth";
+import { Suspense } from "react";
 
-export const metadata : Metadata = {
-    title : "Update profile"
-}
+export const metadata: Metadata = {
+  title: "Update profile",
+};
 
-async function page() {
-  const session = await auth()
+export default function Page() {
   return (
     <div className="flex flex-col gap-5">
       <h2 className="text-xl md:text-3xl tracking-widest text-orange-400 font-medium">
         Guest profile
       </h2>
-      <h3 className="text-xl md:text-3xl tracking-widest text-white/70 font-medium">
-        FullName : {session?.user?.name}
-      </h3>
-      <h3 className="text-xl md:text-3xl tracking-widest text-white/70 font-medium">
-        Email : {session?.user?.email}
-      </h3>
+
+      <Suspense fallback={<Spinner />}>
+        <ProfileInfo />
+      </Suspense>
     </div>
   );
 }
-
-export default page;
