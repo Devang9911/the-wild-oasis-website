@@ -16,7 +16,7 @@ type Prop = {
 };
 
 function ReservationForm({ cabin, session }: Prop) {
-  const { range } = useReservation();
+  const { range, resetRange } = useReservation();
   const { max_capacity, discount, regular_price } = cabin;
   const [isPending, startTransition] = useTransition();
 
@@ -33,8 +33,10 @@ function ReservationForm({ cabin, session }: Prop) {
 
       if (res?.success) {
         toast.success(res.message);
+        resetRange();
       } else {
         toast.error(res?.message || "Failed");
+        resetRange();
       }
     });
   }
