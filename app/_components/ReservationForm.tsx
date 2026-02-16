@@ -108,7 +108,7 @@ function ReservationForm({ cabin, session }: Prop) {
             disabled={isPending}
             className="bg-yellow-600 p-2 hover:bg-yellow-700 disabled:opacity-50"
           >
-            {isPending ? "Booking..." : `Book now for ₹${cabinPrice}`}
+            {isPending ? "Booking..." : `Book now`}
           </button>
         ) : (
           <p className="text-primary-300 text-base">Start by selecting dates</p>
