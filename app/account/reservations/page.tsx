@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: "Reservations",
 };
 
+export const revalidate = 0;
+
 async function page() {
   const session = await auth();
   const bookings = await getBookings(Number(session?.user?.id));

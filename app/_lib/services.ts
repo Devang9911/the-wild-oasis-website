@@ -118,11 +118,11 @@ export type BookingWithCabin = Booking & {
 };
 
 export async function getBookings(
-  guest_id: number
+  guest_id: number,
 ): Promise<BookingWithCabin[]> {
   const { data, error } = await supabase
     .from("bookings")
-    .select("* , cabins(*)") // full table
+    .select("* , cabins(*)")
     .eq("guest_id", guest_id)
     .order("start_date");
 
@@ -133,3 +133,15 @@ export async function getBookings(
 
   return data ?? [];
 }
+//--------------------------------------------------------------------
+// export async function deleteBooking(bookingId: number): Promise<void> {
+//   const { error } = await supabase
+//     .from("bookings")
+//     .delete()
+//     .eq("id", bookingId);
+
+//   if (error) {
+//     console.error("Delete booking error:", error.message);
+//     throw new Error("Booking could not be deleted");
+//   }
+// }

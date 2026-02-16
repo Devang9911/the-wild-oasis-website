@@ -1,8 +1,9 @@
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { Database } from "../_lib/database.types";
+import DeleteReservation from "./DeleteReserve";
 
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
 type Cabin = Database["public"]["Tables"]["cabins"]["Row"];
@@ -11,7 +12,7 @@ export type BookingWithCabin = Booking & {
   cabins: Cabin;
 };
 
-export const formatDistanceFromNow = ({dateStr} : {dateStr : string}) =>
+export const formatDistanceFromNow = ({ dateStr }: { dateStr: string }) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
@@ -32,7 +33,6 @@ function ReservationCard({ booking }: { booking: BookingWithCabin }) {
 
   return (
     <div className="flex flex-col sm:flex-row rounded-xl overflow-hidden border border-primary-800 bg-primary-900/40 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300">
-      
       {/* Image */}
       {image && (
         <div className="relative w-full sm:w-48 h-48 sm:h-auto">
@@ -69,13 +69,12 @@ function ReservationCard({ booking }: { booking: BookingWithCabin }) {
           {start_date && isToday(new Date(start_date))
             ? "Today"
             : start_date && formatDistanceFromNow({ dateStr: start_date })}
-          ) &mdash;{" "}
-          {end_date && format(new Date(end_date), "EEE, MMM dd yyyy")}
+          ) &mdash; {end_date && format(new Date(end_date), "EEE, MMM dd yyyy")}
         </p>
 
         <div className="flex flex-wrap gap-3 mt-4 items-center text-sm sm:text-base">
           <p className="text-lg font-semibold text-accent-400">
-            ${total_price}
+            ₹{total_price}
           </p>
 
           <span className="text-primary-400">&bull;</span>
@@ -92,19 +91,12 @@ function ReservationCard({ booking }: { booking: BookingWithCabin }) {
 
       {/* Actions */}
       {!isPastBooking && (
-        <div className="flex sm:flex-col border-t sm:border-t-0 sm:border-l border-primary-800 w-full sm:w-32">
-          <Link
-            href={``}
-            className="flex items-center justify-center gap-2 uppercase text-xs font-bold text-primary-300 px-4 py-3 hover:bg-accent-600 transition-colors hover:text-primary-900 w-full"
-          >
-            <PencilSquareIcon className="h-5 w-5" />
-            Edit
-          </Link>
+        <div className="border flex flex-col justify-around">
+          <DeleteReservation bookingId={Number(id)} />
         </div>
       )}
     </div>
   );
 }
-
 
 export default ReservationCard;
